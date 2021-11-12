@@ -1,0 +1,60 @@
+
+#big {
+    position: fixed;
+    left: 250px;
+    width: 220px;
+    height: 100%;
+    margin-left: -250px;
+    background: #37474F;
+}
+
+#big header {
+    background-color: #263238;
+    font-size: 20px;
+    line-height: 52px;
+    text-align: center;
+}
+
+#big header a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+#big a:hover {
+    color: white;
+}
+
+
+#big .nav a {
+    background: none;
+    border-bottom: 1px solid #455A64;
+    color: #CFD8DC;
+    font-size: 14px;
+    padding: 16px 24px;
+}
+
+#big .nav a:hover {
+    background: none;
+    color: #ECEFF1;
+}
+
+.glyphicon{
+    width: 30px;
+    margin-right: -14px;
+}
+#container{
+    margin-left: 250px;
+    font-size: 25px;
+    font-weight: bold;
+}
+#select{
+    width: 100%;
+    height: 700px;
+    display: none;
+}
+#insert{
+    width: 100%;
+    height: 700px;
+    display: none;
+}

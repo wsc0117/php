@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>用户查询</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/bootstrap3.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-table.min.css">
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap3.min.js"></script>
+        <script src="../js/bootstrap-table.min.js"></script>
+        <script src="../js/locale/bootstrap-table-zh-CN.min.js"></script>
+    </head>
+    <body>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <select class="form-control" name="selType">
+                    <option value="0">请选择查询条件</option>
+                    <option value="username">用户名</option>
+                </select>
+                <input type="text" class="form-control" id="selVal" placeholder="请输入名称"/>
+            </div>
+            <span class="glyphicon glyphicon-search text-info log"><a href="#" id="find" class="text-success">查询</a></span>
+            &nbsp;
+        </form>
+        <table id="mytab" class="table table-hover table-striped"></table>
+        <script type="text/javascript">
+            $(function () {
+                load();
+            });
+            function load() {
+                $('#mytab').bootstrapTable({
+                    method: 'get',
+                    url: "../scripts/select.php", //请求路径
+                    striped: true, //是否显示行间隔色
+                    pageNumber: 1, //初始化加载第一页
+                    pagination: true,
+                    sidePagination: 'client',
+                    pageSize: 5,
+                    pageList: [5, 20, 30],
+                    columns: [
+                        {
+                            field: "id",
+                            title: "用户ID"
+                        },
+                        {
+                            field: "username",
+                            title: "用户名"
+                        },
+                        {
+                            field: "age",
+                            title: "年龄"
+                        },
+                        {
+                            field: "tel",
+                            title: "电话"
+                        },
+                        {
+                            field: "id",
+                            title: "操作",
+                            formatter: option
+                        },
+                    ]
+                });
+            }
+            function option(value, row, index) {
+                var html = "";
+                html += '<button class="btn btn-warning btn-xs" id="upd" onclick="updUser(' + value + ')">编辑</button>&nbsp;&nbsp;&nbsp;';
+                html += '<button class="btn btn-danger btn-xs" id="del" onclick="delUser(' + value + ')">删除</button>';
+                return html;
+            }
+            function updUser(id) {
+                alert(id);
+//                window.location.href = '../scripts/user_old.php?id=' + id;
+            }
+            $("#find").on("click", function () {
+                var selType = $("select[name='selType']").val();
+                var selVal = $("#selVal").val();
+                findUser(selType, selVal);
+            });
+            function findUser(selType, selVal) {
+                $.ajax({
+                    url: "../scripts/find.php",
+                    dataType: "json",
+                    type: "post",
+                    data: {
+                        "selType": selType,
+                        "selVal": selVal
+                    },
+                    success: function (msg) {
+                        $("#mytab").bootstrapTable('load', msg);
+                    }
+                })
+            }
+
+            //定义删除方法
+            function delUser(ids) {
+                $.ajax({
+                    url: "../scripts/del.php?ids=" + ids,
+                    type: "get",
+                    success: function (data) {
+                        if (data > 0) {
+                            alert("删除成功");
+                            $("#mytab").bootstrapTable('refresh');
+                        }
+                    }
+                })
+            }
+        </script>
+    </body>
+</html>

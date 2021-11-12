@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>后台管理主页</title>
+        <link rel='stylesheet' href='../css/bootstrap3.min.css'>
+        <link rel='stylesheet' href='css/material-design-iconic-font.min.css'>
+        <script src="../js/bootstrap3.min.js"></script>
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/jquery.min.js"></script>
+        <script>
+            $(function () {
+            document.getElementById("selectctrl").onclick = function () {
+            document.getElementById("select").style.display = "block";
+            document.getElementById("come").style.display = "none";
+            document.getElementById("insert").style.display = "none";
+            }
+            document.getElementById("insertctrl").onclick = function () {
+            document.getElementById("insert").style.display = "block";
+            document.getElementById("come").style.display = "none";
+            document.getElementById("select").style.display = "none";
+            }
+            })
+        </script>
+    </head>
+    <body>
+        <div id="big">
+            <header>
+                <a>后台管理</a>
+            </header>
+            <ul class="nav">
+                <li>
+                    <a href="#" id="selectctrl">
+                        <span class="glyphicon glyphicon-user"></span>用户查询
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="insertctrl">
+                        <span class="glyphicon glyphicon-user"></span>添加用户
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div id="container">
+            <p id="come">
+                欢迎您，
+                <code>管理员</code>...
+            </p>
+            <iframe src="select.html" name="select" id="select"></iframe>
+            <iframe src="login.html" name="insert" id="insert"></iframe>
+        </div>
+
+    </body>
+
+</html>
